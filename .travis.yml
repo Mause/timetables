@@ -17,6 +17,7 @@ matrix:
         - pipenv install
       before_script:
       script:
+        - echo "Hello?"
       deploy:
         - provider: heroku
           api_key: ''
