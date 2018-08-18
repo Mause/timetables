@@ -1,11 +1,12 @@
-languages:
-  - node_js
-  - python
+matrix:
+  include:
+    - language: node_js
+      deploy:
+        - provider: aws_s3
+          directory: frontend
 
-deploy:
-  - provider: heroku
-    api_key: ''
-    directory: api
-
-  - provider: aws_s3
-    directory: frontend
+    - language: python
+      deploy:
+        - provider: heroku
+          api_key: ''
+          directory: api
