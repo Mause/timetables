@@ -19,6 +19,7 @@ flask-login = "*"
 numpy = "*"
 matplotlib = "*"
 pillow = "*"
+scrypt = "*"
 
 [dev-packages]
 
