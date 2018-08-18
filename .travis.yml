@@ -3,8 +3,8 @@ matrix:
     - language: node_js
       node_js: 9.11.1
       before_script:
-        - cd frontend
       install:
+        - cd frontend
         - yarn install
       script:
         - yarn build
