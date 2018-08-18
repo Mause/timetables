@@ -6,7 +6,7 @@ from datetime import datetime
 from dateutil.parser import parse as parse_time
 from dateutil.relativedelta import relativedelta
 
-from models import TimetableClass
+from .models import TimetableClass
 
 RE = re.compile(r'([A-Za-z]+),? (\d+(?:am|pm)) till (\d+(?:am|pm))')
 COMMENT_RE = re.compile(r'(//.*)')

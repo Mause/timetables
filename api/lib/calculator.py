@@ -12,8 +12,8 @@ from arrow import Arrow
 from dateutil.parser import parse as parse_date
 from dateutil.relativedelta import relativedelta
 
-from loader import load_classes
-from renderer import render
+from .loader import load_classes
+from .renderer import render
 
 
 

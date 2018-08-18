@@ -15,9 +15,8 @@ from flask_jwt import JWT, current_identity
 
 from db import db
 from gen import generate_mutation, generate_delete_mutation
-sys.path.append('..')
-import calculator
-from loader import spec_parse_time
+from lib import calculator
+from lib.loader import spec_parse_time
 
 logging.basicConfig(level=logging.DEBUG)
 
