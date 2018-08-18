@@ -9,7 +9,10 @@ matrix:
       script:
         - yarn build
       deploy:
-        - provider: aws_s3
+        - provider: s3
+          access_key_id: $ACCESS_KEY_ID
+          secret_access_key: $SECRET_ACCESS_KEY
+          bucket: "timetables-app"
 
     - language: python
       python: 3.6
