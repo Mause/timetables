@@ -9,7 +9,9 @@ matrix:
         - provider: aws_s3
 
     - language: python
+      before_script:
+        - cd api
+      script:
       deploy:
         - provider: heroku
           api_key: ''
-          directory: api
