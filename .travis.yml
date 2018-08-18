@@ -8,7 +8,8 @@ matrix:
       deploy:
         - provider: aws_s3
 
-    - language: python3
+    - language: python
+      version: 3.6.5
       before_script:
         - cd api
       install:
