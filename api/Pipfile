@@ -7,6 +7,13 @@ name = "pypi"
 robobrowser = "*"
 betamax = "*"
 lxml = "*"
+flask = "*"
+graphene = "*"
+flask_cors = "*"
+flask_graphql = "*"
+pony = "*"
+passlib = "*"
+flask_jwt = "*"
 
 [dev-packages]
 
