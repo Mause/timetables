@@ -9,7 +9,7 @@ matrix:
         - provider: aws_s3
 
     - language: python
-      version: 3.6.5
+      python: 3.6
       before_script:
         - cd api
       install:
