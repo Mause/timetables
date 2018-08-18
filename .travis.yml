@@ -4,6 +4,8 @@ matrix:
       node_js: 9.11.1
       before_script:
         - cd frontend
+      install:
+        - yarn install
       script:
         - yarn build
       deploy:
