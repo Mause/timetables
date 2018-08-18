@@ -1,0 +1,7 @@
+deploy:
+  - provider: heroku
+    api_key: ''
+    directory: api
+
+  - provider: aws_s3
+    directory: frontend
