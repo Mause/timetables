@@ -10,11 +10,12 @@ matrix:
 
     - language: python
       python: 3.6
-      before_script:
-        - cd api
       install:
+        - cd api
         - pip3 install pipenv
         - pipenv install
+      before_script:
+        - cd api
       script:
       deploy:
         - provider: heroku
