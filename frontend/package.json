@@ -26,9 +26,9 @@
     "underscore": "^1.9.1"
   },
   "scripts": {
-    "start": "node ./setup && react-scripts-ts start",
-    "build": "node ./setup && react-scripts-ts build",
-    "test": "node ./setup && react-scripts-ts test --env=jsdom",
+    "start": "react-scripts-ts start",
+    "build": "react-scripts-ts build",
+    "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
     "relay": "relay-compiler --src ./src --schema ./schema.graphql"
   },
