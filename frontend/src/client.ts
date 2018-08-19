@@ -1,6 +1,6 @@
 import ApolloClient from 'apollo-boost';
+import { persistCache } from 'apollo-cache-persist';
 import { Operation } from 'apollo-link';
-// import { persistCache } from 'apollo-cache-persist';
 
 const client = new ApolloClient({
   uri: process.env.REACT_APP_API_ENDPOINT,
@@ -13,11 +13,13 @@ const client = new ApolloClient({
   }
 });
 
-// persistCache({
-//   cache: client.cache,
-//   debug: true,
-//   storage: window.localStorage,
-// });
+if (process.env.NODE_ENV === 'production') {
+  persistCache({
+    cache: client.cache,
+    debug: true,
+    storage: window.localStorage,
+  });
+}
 
 let token: string | undefined;
 
