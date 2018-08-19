@@ -15,7 +15,7 @@ class ArrowConverter(orm.dbapiprovider.DatetimeConverter):
 
     def sql2py(self, val):
         try:
-            return Arrow.fromtimestamp(val)
+            return Arrow.fromdatetime(super().sql2py(val))
         except Exception:
             return val
 
@@ -27,7 +27,7 @@ class ArrowConverter(orm.dbapiprovider.DatetimeConverter):
         return val
 
     def py2sql(self, val):
-        return val.datetime.timestamp()
+        return super().py2sql(val.datetime)
 
 
 ClassInstance = type(
