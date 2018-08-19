@@ -54,7 +54,7 @@ class Student(db.Entity, UserMixin):
 
 db_url = os.environ.get('DATABASE_URL')
 if db_url:
-    db.bind('postgres', db_url, create_db=True)
+    db.bind('postgres', db_url)
 else:
     db.bind('sqlite', 'db.db', create_db=True)
 db.provider.converter_classes.append((Arrow, ArrowConverter))
