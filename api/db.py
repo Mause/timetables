@@ -1,3 +1,4 @@
+import os
 from pony import orm
 from arrow import Arrow
 from flask_login import UserMixin
@@ -51,6 +52,10 @@ class Student(db.Entity, UserMixin):
     last_login = orm.Optional(datetime)
 
 
-db.bind('sqlite', 'db.db', create_db=True)
+db_url = os.environ.get('DATABASE_URL')
+if db_url:
+    db.bind('postgres', db_url, create_db=True)
+else:
+    db.bind('sqlite', 'db.db', create_db=True)
 db.provider.converter_classes.append((Arrow, ArrowConverter))
 db.generate_mapping(create_tables=True, check_tables=True)
