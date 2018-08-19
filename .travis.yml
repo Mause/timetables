@@ -6,6 +6,7 @@ matrix:
       install:
         - cd frontend
         - yarn install
+        - apt-get install jq --yes
       env:
         - REACT_APP_API_ENDPOINT=https://fierce-atoll-11652.herokuapp.com/graphiql
       script:
@@ -19,6 +20,12 @@ matrix:
           bucket: "timetables-app"
           skip_cleanup: true
           region: ap-southeast-2
+      after_deploy:
+        - RES=$(aws cloudfront create-invalidation --distribution-id E11EO4PCZRRPGR --paths "/*")
+        - echo $RES
+        - ID=$(echo $RES | jq .Invalidation.Id -r)
+        - "echo ID: $ID"
+        - aws cloudfront wait invalidation-completed --distribution-id E11EO4PCZRRPGR --id $ID
 
     - language: python
       python: 3.6
