@@ -6,6 +6,8 @@ matrix:
       install:
         - cd frontend
         - yarn install
+      env:
+        - API_ENDPOINT=https://fierce-atoll-11652.herokuapp.com/graphiql
       script:
         - yarn build
       before_deploy:

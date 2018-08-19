@@ -3,7 +3,7 @@ import { Operation } from 'apollo-link';
 // import { persistCache } from 'apollo-cache-persist';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:5000/graphql',
+  uri: process.env.API_ENDPOINT || 'http://localhost:5000/graphql',
   async request(operation: Operation): Promise<any> {
     operation.setContext({
         headers: {
