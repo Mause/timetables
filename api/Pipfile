@@ -21,6 +21,7 @@ matplotlib = "*"
 pillow = "*"
 scrypt = "*"
 gunicorn = "*"
+"psycopg2" = "*"
 
 [dev-packages]
 
