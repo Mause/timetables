@@ -5,10 +5,8 @@
   "dependencies": {
     "@types/graphql": "^0.13.3",
     "@types/prop-types": "^15.5.4",
-    "@types/react-relay": "^1.3.6",
     "@types/react-router-dom": "^4.3.0",
     "@types/react-treeview": "^0.4.1",
-    "@types/relay-runtime": "^1.3.3",
     "@types/underscore": "^1.8.8",
     "apollo-boost": "^0.1.12",
     "apollo-cache-persist": "^0.1.1",
@@ -19,7 +17,6 @@
     "react": "^16.4.1",
     "react-apollo": "^2.1.9",
     "react-dom": "^16.4.1",
-    "react-relay": "^1.6.2",
     "react-router-dom": "^4.3.1",
     "react-scripts-ts": "2.16.0",
     "react-treeview": "^0.4.7",
@@ -29,17 +26,14 @@
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject",
-    "relay": "relay-compiler --src ./src --schema ./schema.graphql"
+    "eject": "react-scripts-ts eject"
   },
   "devDependencies": {
     "@types/jest": "^23.3.1",
     "@types/node": "^10.5.4",
     "@types/react": "^16.4.7",
     "@types/react-dom": "^16.0.6",
-    "babel-plugin-relay": "^1.6.2",
     "graphql": "^0.13.2",
-    "relay-compiler": "^1.6.2",
     "typescript": "^2.9.2"
   }
 }
