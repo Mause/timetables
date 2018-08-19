@@ -8,6 +8,11 @@ db = orm.Database()
 
 
 class ArrowConverter(orm.dbapiprovider.DatetimeConverter):
+
+    @property
+    def sql_type_name(self):
+        return self.provider.get_converter_by_py_type(datetime).sql_type_name
+
     def sql2py(self, val):
         try:
             return Arrow.fromtimestamp(val)
