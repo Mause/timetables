@@ -6,7 +6,7 @@ matrix:
       install:
         - cd frontend
         - yarn install
-        - sudo apt-get install jq --yes
+        - sudo apt-get install jq awscli --yes
       env:
         - REACT_APP_API_ENDPOINT=https://fierce-atoll-11652.herokuapp.com/graphiql
       script:
