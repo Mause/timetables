@@ -14,7 +14,7 @@ class TimeSelect extends Component<ITimeSelectProps, {}, {}> {
   }
   public render() {
     return (
-      <input type="time" ref={this.timeRef} defaultValue={this.props.defaultValue} />
+      <input className="input" type="time" ref={this.timeRef} defaultValue={this.props.defaultValue} />
     );
   }
   public get() {
