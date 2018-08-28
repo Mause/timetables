@@ -15,8 +15,6 @@ from dateutil.relativedelta import relativedelta
 from .loader import load_classes
 from .renderer import render
 
-
-
 DAYS = dict(zip(calendar.day_name, count()))
 BAD_DAYS = {
     'Thursday',
@@ -175,13 +173,15 @@ def classes_during_lunch(days):
 def main():
     classes = list(load_classes())
 
-
     possibles = all_possible_class_combinations(classes)
 
     # user specifyable
     possibles = filter(none_on_bad_days, possibles)
     possibles = filter(
-        lambda days: average_starting_time(days) > relative_to_time(relativedelta(hours=9)),
+        lambda days: (
+            average_starting_time(days) >
+            relative_to_time(relativedelta(hours=9))
+        ),
         possibles
     )
     possibles = filter(
@@ -208,6 +208,7 @@ def do_render(possible):
 
     filename = '{}.png'.format(determine_hash(possible))
     img.save(join('possibles', filename))
+
 
 if __name__ == '__main__':
     main()

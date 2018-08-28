@@ -151,7 +151,6 @@ class Student(graphene.ObjectType):
         return self.classes.order_by(db.Class.id)
 
     def resolve_timetables(self, info, **kwargs):
-        print(self, info, kwargs)
         def make_day(tid, index, day):
             return Day(
                 id=f'{tid}.{index}',

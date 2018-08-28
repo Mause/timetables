@@ -2,6 +2,7 @@ import re
 import json
 import calendar
 from datetime import datetime
+from typing import Tuple, List, Iterator
 
 from dateutil.parser import parse as parse_time
 from dateutil.relativedelta import relativedelta
@@ -27,7 +28,7 @@ def spec_parse_time(timestr):
     return t.replace(year=2016, month=2, day=8 + t.weekday())
 
 
-def parse_times(timestr: str) -> (datetime, datetime):
+def parse_times(timestr: str) -> Tuple[datetime, datetime]:
     match = RE.match(timestr)
 
     if not match:
@@ -66,7 +67,7 @@ def parse_times(timestr: str) -> (datetime, datetime):
     return span
 
 
-def load_classes() -> list:
+def load_classes() -> Iterator[List[TimetableClass]]:
     with open('classes.json') as fh:
         data = json.loads(COMMENT_RE.sub('', fh.read()))
 
