@@ -22,6 +22,7 @@ pillow = "*"
 scrypt = "*"
 gunicorn = "*"
 "psycopg2" = "*"
+pyyaml = "*"
 
 [dev-packages]
 ipdb = "*"
