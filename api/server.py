@@ -1,8 +1,10 @@
 import os
 import logging
 import calendar
+import traceback
 from functools import wraps
 
+import yaml
 import flask
 import graphene
 from pony.flask import Pony
@@ -15,7 +17,7 @@ from flask_jwt import JWT, current_identity
 from db import db
 from gen import generate_mutation, generate_delete_mutation
 from lib import calculator
-from lib.loader import spec_parse_time
+from lib.loader import spec_parse_time, parse_times
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -235,6 +237,41 @@ class CreateStudent(graphene.Mutation):
         return CreateStudent(db.Student(**kwargs))
 
 
+class Import(graphene.Mutation):
+    class Arguments:
+        userId = graphene.NonNull(graphene.ID)
+        raw = graphene.NonNull(graphene.String)
+
+    success = graphene.Boolean()
+
+    def mutate(self, info, userId, raw):
+        user = db.Student.get(id=userId)
+        if not user:
+            raise Exception('No such user')
+        try:
+            data = yaml.load(raw)
+        except Exception:
+            traceback.print_exc()
+            raise Exception('Invalid yaml')
+
+        if not isinstance(data, dict):
+            raise Exception('Invalid yaml')
+
+        for name, times in data.items():
+            clazz = db.Class(name=name, student=user)
+
+            for time in set(times):
+                start, end = parse_times(time)
+                db.ClassInstance(**{
+                    'class': clazz,
+                    'start': start,
+                    'end': end,
+                    'location': 'idk'
+                })
+
+        return Import(True)
+
+
 class Mutation(graphene.ObjectType):
     create_student = CreateStudent.Field()
     login = Login.Field()
@@ -246,6 +283,7 @@ class Mutation(graphene.ObjectType):
     )
     delete_class_instance = generate_delete_mutation(ClassInstance)
     delete_class = generate_delete_mutation(Class)
+    import_classes = Import.Field()
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
