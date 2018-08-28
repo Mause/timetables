@@ -21,6 +21,7 @@ matrix:
           skip_cleanup: true
           region: ap-southeast-2
       after_deploy:
+        - aws configure set preview.cloudfront true
         - RES=$(aws cloudfront create-invalidation --distribution-id E11EO4PCZRRPGR --paths "/*")
         - echo $RES
         - ID=$(echo $RES | jq .Invalidation.Id -r)
