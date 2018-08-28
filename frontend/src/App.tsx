@@ -1,6 +1,7 @@
 import {
   Container,
   Navbar,
+  NavbarBrand,
   NavbarItem,
   NavbarMenu,
   NavbarStart,
@@ -35,13 +36,14 @@ class App extends React.Component<IAppProps, IAppState, {}> {
   public render() {
     return (
       <Container className="app">
-        <Title>Timetables</Title>
-
         <Navbar>
+          <NavbarBrand>
+            <Title>Timetables</Title>
+          </NavbarBrand>
           <NavbarMenu>
             <NavbarStart>
               {this.state.userId ? (
-                <div>
+                <>
                   <NavbarItem>
                     <Link to={`/student/${this.state.userId}/classes`}>
                       Classes
@@ -52,7 +54,7 @@ class App extends React.Component<IAppProps, IAppState, {}> {
                       Timetables
                     </Link>
                   </NavbarItem>
-                </div>
+                </>
               ) : null}
             </NavbarStart>
           </NavbarMenu>
