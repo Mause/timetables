@@ -6,7 +6,8 @@ matrix:
       install:
         - cd frontend
         - yarn install
-        - sudo apt-get install jq awscli --yes
+        - sudo apt-get install jq python3 --yes
+        - sudo pip3 install awscli
       env:
         - REACT_APP_API_ENDPOINT=https://fierce-atoll-11652.herokuapp.com/graphiql
       script:
@@ -21,7 +22,6 @@ matrix:
           skip_cleanup: true
           region: ap-southeast-2
       after_deploy:
-        - aws configure set preview.cloudfront true
         - RES=$(aws cloudfront create-invalidation --distribution-id E11EO4PCZRRPGR --paths "/*")
         - echo $RES
         - ID=$(echo $RES | jq .Invalidation.Id -r)
