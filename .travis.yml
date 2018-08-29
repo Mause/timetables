@@ -3,6 +3,9 @@ matrix:
     - language: node_js
       node_js: 9.11.1
       dist: "trusty"
+      before_addons:
+        - sudo add-apt-repository ppa:jonathonf/python-3.6
+        - sudo apt-get update
       addons:
         apt:
           packages:
