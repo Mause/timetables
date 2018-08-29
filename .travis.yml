@@ -10,6 +10,8 @@ matrix:
         - sudo pip3 install awscli
       env:
         - REACT_APP_API_ENDPOINT=https://fierce-atoll-11652.herokuapp.com/graphiql
+        - AWS_ACCESS_KEY_ID=$ACCESS_KEY_ID
+        - AWS_SECRET_ACCESS_KEY=$SECRET_ACCESS_KEY
       script:
         - yarn build
       before_deploy:
