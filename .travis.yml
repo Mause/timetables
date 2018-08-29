@@ -11,7 +11,7 @@ matrix:
             - "python3-setuptools"
       before_script:
       install:
-        - sudo easy_install3 install awscli
+        - sudo easy_install3 awscli
         - cd frontend
         - yarn install
       env:
