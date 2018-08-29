@@ -2,12 +2,18 @@ matrix:
   include:
     - language: node_js
       node_js: 9.11.1
+      dist: "trusty"
+      addons:
+        apt:
+          packages:
+            - "jq"
+            - "python3"
+            - "python3-setuptools"
       before_script:
       install:
+        - sudo easy_install3 install awscli
         - cd frontend
         - yarn install
-        - sudo apt-get install jq python3 python3-pip --yes
-        - sudo pip3 install awscli
       env:
         - REACT_APP_API_ENDPOINT=https://fierce-atoll-11652.herokuapp.com/graphiql
         - AWS_ACCESS_KEY_ID=$ACCESS_KEY_ID
