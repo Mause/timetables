@@ -6,7 +6,7 @@ matrix:
       install:
         - cd frontend
         - yarn install
-        - sudo apt-get install jq python3 --yes
+        - sudo apt-get install jq python3 python3-pip --yes
         - sudo pip3 install awscli
       env:
         - REACT_APP_API_ENDPOINT=https://fierce-atoll-11652.herokuapp.com/graphiql
