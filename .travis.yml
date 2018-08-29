@@ -3,17 +3,11 @@ matrix:
     - language: node_js
       node_js: 9.11.1
       dist: "trusty"
-      before_addons:
-        - sudo add-apt-repository ppa:jonathonf/python-3.6
-        - sudo apt-get update
-      addons:
-        apt:
-          packages:
-            - "jq"
-            - "python3"
-            - "python3-setuptools"
       before_script:
       install:
+        - sudo add-apt-repository ppa:jonathonf/python-3.6
+        - sudo apt-get update
+        - sudo apt install -y jq python3 python3-setuptools
         - sudo easy_install3 awscli
         - cd frontend
         - yarn install
