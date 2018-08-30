@@ -9,6 +9,7 @@ import {
   NavbarStart,
   Title,
 } from 'bloomer';
+import { decode } from 'jsonwebtoken';
 import * as React from 'react';
 import { Link, Route, RouteComponentProps, withRouter } from 'react-router-dom';
 
@@ -20,11 +21,26 @@ import { setAuth } from './client';
 import Debug from './components/Debug';
 import Login from './components/Login';
 import Student from './components/Student';
+import { IStudentShell } from './components/types';
 
 interface IAppProps extends RouteComponentProps<{}, {}, { userId: string | undefined }> {
 }
 interface IAppState {
   userId: string | undefined;
+}
+
+function userDecode(s: string | null): IStudentShell | null {
+  if (!s) {
+    return null;
+  }
+  const d: any = decode(s);
+  if (!d) {
+    return null;
+  }
+  return {
+    id: d.identity,
+    name: d.username,
+  } as IStudentShell;
 }
 
 class App extends React.Component<IAppProps, IAppState, {}> {

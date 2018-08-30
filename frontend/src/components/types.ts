@@ -22,9 +22,12 @@ export interface IClass {
   instances: IClassInstance[]
 }
 
-export interface IStudent {
+export interface IStudentShell {
   name: string;
   id: string;
+}
+
+export interface IStudent extends IStudentShell {
   sid: string;
   classes?: IClass[];
 }
