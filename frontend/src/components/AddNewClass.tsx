@@ -6,7 +6,7 @@ import { Component, createRef, FormEvent, RefObject } from 'react';
 import { FetchResult, Mutation, MutationFn } from 'react-apollo';
 import * as _ from 'underscore';
 import { GET_CLASSES } from './Classes';
-import { IClass, IStudent } from './types';
+import { IClass, IStudent, IStudentShell } from './types';
 
 const ADD_CLASS = gql`
   mutation CreateClass($name: String!, $studentId: ID!) {
@@ -36,7 +36,7 @@ interface IResult {
 interface IAddNewClassProps {
   mutateFn: MutationFn<IResult, ICreateClassMutation>;
   result: any;
-  student: IStudent;
+  student: IStudentShell;
 }
 
 class AddNewClass extends Component<IAddNewClassProps, {}, {}> {
@@ -113,7 +113,7 @@ function update(
   });
 }
 
-export default ({ student }: { student: IStudent }) => {
+export default ({ student }: { student: IStudentShell }) => {
   return (
     <Mutation mutation={ADD_CLASS} update={_.partial(update, student)}>
       {(mutateFn, result) => (

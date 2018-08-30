@@ -18,7 +18,7 @@ import * as _ from 'underscore';
 import AddNewClass from './AddNewClass';
 import AddNewClassInstance from './AddNewClassInstance';
 import renderError from './renderError';
-import { IClass, IClassInstance, IStudent } from './types';
+import { IClass, IClassInstance, IStudent, IStudentShell } from './types';
 
 interface IClassesQuery {
   student: IStudent;
@@ -54,7 +54,7 @@ type IDeleteClassOptions = MutationOptions<
 
 interface IClassesProps {
   qr: QueryResult<IClassesQuery>;
-  student: IStudent;
+  student: IStudentShell;
   DeleteClassInstance: (options: IDeleteClassInstanceOptions) => void;
   DeleteClass: (options: IDeleteClassOptions) => void;
 }
@@ -263,7 +263,7 @@ export default compose(
     DeleteClassInstance,
     DeleteClass,
   }: {
-    student: IStudent;
+    student: IStudentShell;
     DeleteClassInstance: (options: IDeleteClassInstanceOptions) => void;
     DeleteClass: (options: IDeleteClassOptions) => void;
   }) => (

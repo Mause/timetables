@@ -7,7 +7,7 @@ import { FetchResult, Mutation, MutationFn } from 'react-apollo';
 import * as _ from 'underscore';
 import { GET_CLASSES } from './Classes';
 import TimeRangeSelect from './TimeRangeSelect';
-import { IClassInstance, IStudent } from './types';
+import { IClassInstance, IStudent, IStudentShell } from './types';
 
 const ADD_CLASS_INSTANCE = gql`
   mutation CreateClassInstance(
@@ -47,7 +47,7 @@ interface IResult {
 interface IAddNewClassProps {
   mutateFn: MutationFn<IResult, ICreateClassMutation>;
   result: any;
-  student: IStudent;
+  student: IStudentShell;
   classId: string;
 }
 
@@ -142,7 +142,7 @@ function update(
 
 interface IProps {
   classId: string;
-  student: IStudent;
+  student: IStudentShell;
 }
 
 export default ({ classId, student }: IProps) => {

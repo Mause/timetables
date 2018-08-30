@@ -10,7 +10,7 @@ import gql from 'graphql-tag';
 import * as React from 'react';
 import { Component, createRef, FormEvent } from 'react';
 import { compose, FetchResult, graphql, MutationOptions } from 'react-apollo';
-import { IStudent } from './types';
+import { IStudentShell } from './types';
 
 interface IImportData {
   importClasses: {
@@ -24,7 +24,7 @@ type IImportOptions = MutationOptions<
 >;
 
 interface IImportProps {
-  student: IStudent;
+  student: IStudentShell;
   Import: (options: IImportOptions) => FetchResult<IImportData>;
 }
 interface IImportState {
