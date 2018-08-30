@@ -5,6 +5,7 @@ import { Component } from 'react';
 import { Query, QueryResult } from 'react-apollo';
 import { Route, Switch } from 'react-router-dom';
 import Classes from './Classes';
+import Import from './Import';
 import NaiveTimetable from './NaiveTimetable';
 import { IStudent } from './types';
 
@@ -41,6 +42,8 @@ class Student extends Component<{}, {}, {}> {
               const classes = () => <Classes student={student} />;
               // tslint:disable-next-line jsx-no-lambda
               const timetables = () => <NaiveTimetable student={student} />;
+              // tslint:disable-next-line jsx-no-lambda
+              const importComp = () => <Import student={student} />;
 
               return (
                 <div>
@@ -56,6 +59,11 @@ class Student extends Component<{}, {}, {}> {
                         exact={true}
                         path="/student/:id/timetables"
                         render={timetables}
+                      />
+                      <Route
+                        exact={true}
+                        path="/student/:id/import"
+                        render={importComp}
                       />
                     </Switch>
                   </Box>

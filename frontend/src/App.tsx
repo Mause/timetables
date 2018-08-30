@@ -86,6 +86,11 @@ class App extends Component<IAppProps, IAppState, {}> {
                       Timetables
                     </Link>
                   </NavbarItem>
+                  <NavbarItem>
+                    <Link to={`/student/${this.state.user.id}/import`}>
+                      Import
+                    </Link>
+                  </NavbarItem>
                 </>
               ) : null}
             </NavbarStart>
