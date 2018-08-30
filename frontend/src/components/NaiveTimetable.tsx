@@ -7,7 +7,7 @@ import { Query } from 'react-apollo';
 import * as _ from 'underscore';
 import Frame from './Frame';
 import renderError from './renderError';
-import { IClassInstance, IStudent, ITimetable } from './types';
+import { IClassInstance, IStudentShell, ITimetable } from './types';
 import WEEKDAYS from './weekdays';
 
 interface INaiveTimetableProps {
@@ -64,7 +64,7 @@ function callback(item: ITimetable) {
   return <NaiveTimetable timetable={item}/>;
 }
 
-export default ({ student }: { student: IStudent }) => (
+export default ({ student }: { student: IStudentShell }) => (
   <Query
     query={gql`
       query NaiveTimetableQuery($id: ID!) {

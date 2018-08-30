@@ -5,11 +5,11 @@ import { Route, Switch } from 'react-router-dom';
 import Classes from './Classes';
 import Import from './Import';
 import NaiveTimetable from './NaiveTimetable';
-import { IStudent, IStudentShell } from './types';
+import { IStudentShell } from './types';
 
 class Student extends Component<{student: IStudentShell}, {}, {}> {
   public render() {
-    const student = this.props.student as IStudent;
+    const student = this.props.student;
 
     // tslint:disable-next-line jsx-no-lambda
     const classes = () => <Classes student={student} />;
