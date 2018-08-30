@@ -11,22 +11,28 @@ import {
 } from 'bloomer';
 import { decode } from 'jsonwebtoken';
 import * as React from 'react';
-import { Link, Route, RouteComponentProps, withRouter } from 'react-router-dom';
+import { Component, FormEvent } from 'react';
+import {
+  Link,
+  Redirect,
+  Route,
+  RouteComponentProps,
+  withRouter,
+} from 'react-router-dom';
 
 import 'bulma/css/bulma.css';
 import './app.css';
 import './normalise.css';
 
-import { setAuth } from './client';
+import { getAuth, setAuth } from './client';
 import Debug from './components/Debug';
 import Login from './components/Login';
 import Student from './components/Student';
 import { IStudentShell } from './components/types';
 
-interface IAppProps extends RouteComponentProps<{}, {}, { userId: string | undefined }> {
-}
+interface IAppProps extends RouteComponentProps<{}, {}, {}> {}
 interface IAppState {
-  userId: string | undefined;
+  user: IStudentShell | null;
 }
 
 function userDecode(s: string | null): IStudentShell | null {
@@ -43,17 +49,23 @@ function userDecode(s: string | null): IStudentShell | null {
   } as IStudentShell;
 }
 
-class App extends React.Component<IAppProps, IAppState, {}> {
+class App extends Component<IAppProps, IAppState, {}> {
   constructor(props: IAppProps) {
     super(props);
-    if (props.location.state && props.location.state.userId) {
-      this.state = { userId: props.location.state.userId };
-    } else {
-      this.state = { userId: undefined };
-    }
+    const auth = getAuth();
+    this.state = { user: userDecode(auth) };
+    this.setAuth = this.setAuth.bind(this);
+    this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
   }
   public render() {
+    const isLogin = this.props.location.pathname === '/login';
+    if (!isLogin && !this.state.user) {
+      return <Redirect to="/login" />;
+    } else if (isLogin && this.state.user) {
+      return <Redirect to="/" />;
+    }
+
     return (
       <Container className="app">
         <Navbar>
@@ -62,15 +74,15 @@ class App extends React.Component<IAppProps, IAppState, {}> {
           </NavbarBrand>
           <NavbarMenu>
             <NavbarStart>
-              {this.state.userId ? (
+              {this.state.user ? (
                 <>
                   <NavbarItem>
-                    <Link to={`/student/${this.state.userId}/classes`}>
+                    <Link to={`/student/${this.state.user.id}/classes`}>
                       Classes
                     </Link>
                   </NavbarItem>
                   <NavbarItem>
-                    <Link to={`/student/${this.state.userId}/timetables`}>
+                    <Link to={`/student/${this.state.user.id}/timetables`}>
                       Timetables
                     </Link>
                   </NavbarItem>
@@ -78,7 +90,7 @@ class App extends React.Component<IAppProps, IAppState, {}> {
               ) : null}
             </NavbarStart>
             <NavbarEnd>
-              {this.state.userId && (
+              {this.state.user && (
                 <NavbarItem>
                   <Button onClick={this.logout}>Logout</Button>
                 </NavbarItem>
@@ -87,11 +99,14 @@ class App extends React.Component<IAppProps, IAppState, {}> {
           </NavbarMenu>
         </Navbar>
 
-        <Route exact={true} path="/login" component={Login} />
+        <Route exact={true} path="/login" render={this.login} />
         <Route exact={true} path="/debug" component={Debug} />
         <Student />
       </Container>
     );
+  }
+  private login() {
+    return <Login setAuth={this.setAuth} />;
   }
   private logout(ev: FormEvent<any>) {
     this.setState({ user: null });
