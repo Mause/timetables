@@ -12,7 +12,7 @@ from flask_cors import CORS
 from flask_graphql import GraphQLView
 from pony.flask import Pony
 from passlib.context import CryptContext
-from flask_jwt import JWT, current_identity
+from flask_jwt import JWT, current_identity, _default_jwt_payload_handler
 
 from db import db
 from gen import generate_mutation, generate_delete_mutation
@@ -37,6 +37,10 @@ logging.basicConfig(level=logging.INFO)
 
 jwt = JWT(None, None, lambda payload: db.Student.get(id=payload['id']))
 jwt.auth_request_callback = None
+jwt.jwt_payload_callback = lambda identity: dict(
+    _default_jwt_payload_handler(identity),
+    username=identity.name
+)
 jwt.init_app(app)
 
 
