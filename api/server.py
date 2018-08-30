@@ -121,7 +121,7 @@ class Class(graphene.ObjectType):
     instances = graphene.List(ClassInstance)
 
     def resolve_instances(self, info):
-        return sorted(self.instances, key=lambda c: c.id)
+        return sorted(self.instances)
 
 
 class Day(graphene.ObjectType):
