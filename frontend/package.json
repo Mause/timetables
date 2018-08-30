@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@types/graphql": "^0.13.3",
+    "@types/jsonwebtoken": "^7.2.8",
     "@types/prop-types": "^15.5.4",
     "@types/react-router-dom": "^4.3.0",
     "@types/react-treeview": "^0.4.1",
@@ -12,6 +13,7 @@
     "apollo-cache-persist": "^0.1.1",
     "bloomer": "^0.6.3",
     "bulma": "^0.7.1",
+    "jsonwebtoken": "^8.3.0",
     "moment": "^2.22.2",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
