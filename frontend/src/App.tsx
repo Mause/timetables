@@ -106,7 +106,10 @@ class App extends Component<IAppProps, IAppState, {}> {
 
         <Route exact={true} path="/login" render={this.login} />
         <Route exact={true} path="/debug" component={Debug} />
-        <Student />
+        {
+          this.state.user &&
+          <Student student={this.state.user} />
+        }
       </Container>
     );
   }
