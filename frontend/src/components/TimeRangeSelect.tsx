@@ -43,13 +43,11 @@ class TimeRangeSelect extends Component<
     return (
       <Field isHorizontal={true}>
         <Field isHorizontal={true}>
-          <FieldLabel>
-            <Label>
-              Day:
-            </Label>
+          <FieldLabel isNormal={true}>
+            <Label>Day:</Label>
           </FieldLabel>
           <FieldBody>
-            <Control>
+            <Control isExpanded={true}>
               <Select onChange={this.changeDay}>
                 {DAYS.map((name, idx) => <option key={idx}>{name}</option>)}
               </Select>
@@ -57,14 +55,24 @@ class TimeRangeSelect extends Component<
           </FieldBody>
         </Field>
         <Field isHorizontal={true}>
-          <label>
-            Start: <TimeSelect defaultValue="08:00" ref={this.startRef} />
-          </label>
+          <FieldLabel isNormal={true}>
+            <Label>Start:</Label>
+          </FieldLabel>
+          <FieldBody>
+            <Control isExpanded={true}>
+              <TimeSelect defaultValue="08:00" ref={this.startRef} />
+            </Control>
+          </FieldBody>
         </Field>
         <Field isHorizontal={true}>
-          <label>
-            End: <TimeSelect defaultValue="09:00" ref={this.endRef} />
-          </label>
+          <FieldLabel isNormal={true}>
+            <Label>End:</Label>
+          </FieldLabel>
+          <FieldBody>
+            <Control isExpanded={true}>
+              <TimeSelect defaultValue="09:00" ref={this.endRef} />
+            </Control>
+          </FieldBody>
         </Field>
       </Field>
     );
