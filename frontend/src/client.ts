@@ -7,7 +7,7 @@ const client = new ApolloClient({
   async request(operation: Operation): Promise<any> {
     operation.setContext({
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${getAuth()}`,
       },
     });
   },
@@ -21,14 +21,11 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-let token: string | undefined = localStorage.getItem('token') || undefined;
-
 export function setAuth(inToken: string | undefined) {
-  token = inToken;
   localStorage.setItem('token', inToken || '')
 }
 export function getAuth(): string | undefined {
-  return token;
+  return localStorage.getItem('token') || null;
 }
 
 export default client;
