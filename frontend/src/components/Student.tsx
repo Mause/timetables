@@ -1,7 +1,7 @@
 import { Box, Title } from 'bloomer';
 import * as React from 'react';
 import { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import Classes from './Classes';
 import Import from './Import';
 import NaiveTimetable from './NaiveTimetable';
@@ -26,10 +26,14 @@ class Student extends Component<{student: IStudentShell}, {}, {}> {
             <Route exact={true} path="/classes" render={classes} />
             <Route exact={true} path="/timetables" render={timetables} />
             <Route exact={true} path="/import" render={importComp} />
+            <Route exact={true} path="/" render={this.root} />
           </Switch>
         </Box>
       </div>
     );
+  }
+  private root() {
+    return <Redirect to="/classes" />;
   }
 }
 
