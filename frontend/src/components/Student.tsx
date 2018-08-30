@@ -23,21 +23,9 @@ class Student extends Component<{student: IStudentShell}, {}, {}> {
         <Title>{student.name}'s timetables</Title>
         <Box>
           <Switch>
-            <Route
-              exact={true}
-              path="/student/:id/classes"
-              render={classes}
-            />
-            <Route
-              exact={true}
-              path="/student/:id/timetables"
-              render={timetables}
-            />
-            <Route
-              exact={true}
-              path="/student/:id/import"
-              render={importComp}
-            />
+            <Route exact={true} path="/classes" render={classes} />
+            <Route exact={true} path="/timetables" render={timetables} />
+            <Route exact={true} path="/import" render={importComp} />
           </Switch>
         </Box>
       </div>

@@ -77,19 +77,13 @@ class App extends Component<IAppProps, IAppState, {}> {
               {this.state.user ? (
                 <>
                   <NavbarItem>
-                    <Link to={`/student/${this.state.user.id}/classes`}>
-                      Classes
-                    </Link>
+                    <Link to={`/classes`}>Classes</Link>
                   </NavbarItem>
                   <NavbarItem>
-                    <Link to={`/student/${this.state.user.id}/timetables`}>
-                      Timetables
-                    </Link>
+                    <Link to={`/timetables`}>Timetables</Link>
                   </NavbarItem>
                   <NavbarItem>
-                    <Link to={`/student/${this.state.user.id}/import`}>
-                      Import
-                    </Link>
+                    <Link to={`/import`}>Import</Link>
                   </NavbarItem>
                 </>
               ) : null}
