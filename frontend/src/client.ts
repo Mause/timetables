@@ -6,11 +6,11 @@ const client = new ApolloClient({
   uri: process.env.REACT_APP_API_ENDPOINT,
   async request(operation: Operation): Promise<any> {
     operation.setContext({
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
-  }
+  },
 });
 
 if (process.env.NODE_ENV === 'production') {
