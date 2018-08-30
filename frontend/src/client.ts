@@ -21,10 +21,10 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-export function setAuth(inToken: string | undefined) {
+export function setAuth(inToken: string | null) {
   localStorage.setItem('token', inToken || '')
 }
-export function getAuth(): string | undefined {
+export function getAuth(): string | null {
   return localStorage.getItem('token') || null;
 }
 
