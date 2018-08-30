@@ -41,13 +41,13 @@ class TimeRangeSelect extends Component<
   }
   public render() {
     return (
-      <Field isHorizontal={true}>
+      <>
         <Field isHorizontal={true}>
           <FieldLabel isNormal={true}>
             <Label>Day:</Label>
           </FieldLabel>
           <FieldBody>
-            <Control isExpanded={true}>
+            <Control>
               <Select onChange={this.changeDay}>
                 {DAYS.map((name, idx) => <option key={idx}>{name}</option>)}
               </Select>
@@ -59,7 +59,7 @@ class TimeRangeSelect extends Component<
             <Label>Start:</Label>
           </FieldLabel>
           <FieldBody>
-            <Control isExpanded={true}>
+            <Control>
               <TimeSelect defaultValue="08:00" ref={this.startRef} />
             </Control>
           </FieldBody>
@@ -69,12 +69,12 @@ class TimeRangeSelect extends Component<
             <Label>End:</Label>
           </FieldLabel>
           <FieldBody>
-            <Control isExpanded={true}>
+            <Control>
               <TimeSelect defaultValue="09:00" ref={this.endRef} />
             </Control>
           </FieldBody>
         </Field>
-      </Field>
+      </>
     );
   }
   public startAsDate(): moment.Moment {

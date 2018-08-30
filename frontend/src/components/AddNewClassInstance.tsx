@@ -63,18 +63,18 @@ class AddNewClassInstance extends Component<IAddNewClassProps, {}, {}> {
     return (
       <form onSubmit={this.onSubmit}>
         <Field isHorizontal={true}>
-          <FieldLabel>
-            <Label>
-              Location:
-            </Label>
-          </FieldLabel>
-          <FieldBody>
-            <Control>
-              <input className="input" ref={this.locationRef} />
-            </Control>
-          </FieldBody>
+          <Field isHorizontal={true}>
+            <FieldLabel isNormal={true}>
+              <Label>Location:</Label>
+            </FieldLabel>
+            <FieldBody>
+              <Control>
+                <input className="input" ref={this.locationRef} />
+              </Control>
+            </FieldBody>
+          </Field>
+          <TimeRangeSelect ref={this.rangeRef} />
         </Field>
-        <TimeRangeSelect ref={this.rangeRef} />
         <Button type="submit">Submit</Button>
       </form>
     );
