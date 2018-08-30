@@ -1,7 +1,9 @@
 import {
+  Button,
   Container,
   Navbar,
   NavbarBrand,
+  NavbarEnd,
   NavbarItem,
   NavbarMenu,
   NavbarStart,
@@ -14,6 +16,7 @@ import 'bulma/css/bulma.css';
 import './app.css';
 import './normalise.css';
 
+import { setAuth } from './client';
 import Debug from './components/Debug';
 import Login from './components/Login';
 import Student from './components/Student';
@@ -32,6 +35,7 @@ class App extends React.Component<IAppProps, IAppState, {}> {
     } else {
       this.state = { userId: undefined };
     }
+    this.logout = this.logout.bind(this);
   }
   public render() {
     return (
@@ -57,6 +61,13 @@ class App extends React.Component<IAppProps, IAppState, {}> {
                 </>
               ) : null}
             </NavbarStart>
+            <NavbarEnd>
+              {this.state.userId && (
+                <NavbarItem>
+                  <Button onClick={this.logout}>Logout</Button>
+                </NavbarItem>
+              )}
+            </NavbarEnd>
           </NavbarMenu>
         </Navbar>
 
@@ -65,6 +76,13 @@ class App extends React.Component<IAppProps, IAppState, {}> {
         <Student />
       </Container>
     );
+  }
+  private logout(ev: FormEvent<any>) {
+    this.setState({ user: null });
+    setAuth(null);
+  }
+  private setAuth(token: string): void {
+    this.setState({ user: userDecode(token) });
   }
 }
 
