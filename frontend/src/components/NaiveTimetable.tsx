@@ -28,13 +28,6 @@ function makeClass(cell: IClassInstance) {
         {fmt(cell.start)} to {fmt(cell.end)} in {cell.location}
       </CardContent>
     </Card>
-    // <div>
-    //   <span>{cell.class.name}</span>
-    //   @
-    //   <span>{fmt(cell.start)}</span>
-    //   -
-    //   <span>{fmt(cell.end)}</span>
-    // </div>
   );
 }
 

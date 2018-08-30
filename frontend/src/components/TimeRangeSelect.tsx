@@ -1,4 +1,4 @@
-import { Control, Field, FieldBody, FieldLabel, Label, Select   } from 'bloomer';
+import { Control, Field, FieldBody, FieldLabel, Label, Select } from 'bloomer';
 import * as moment from 'moment';
 import * as React from 'react';
 import { Component, createRef, FormEvent, RefObject } from 'react';
@@ -37,7 +37,7 @@ class TimeRangeSelect extends Component<
     this.get = this.get.bind(this);
     this.startAsDate = this.startAsDate.bind(this);
     this.endAsDate = this.endAsDate.bind(this);
-    this.state = {day: 0, start: new Date(), end: new Date()};
+    this.state = { day: 0, start: new Date(), end: new Date() };
   }
   public render() {
     return (

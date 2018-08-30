@@ -51,13 +51,13 @@ class AddNewClass extends Component<IAddNewClassProps, {}, {}> {
       <form onSubmit={this.onSubmit}>
         <Field isHorizontal={true}>
           <Field isGrouped={true}>
-          <FieldLabel>
-            <Label>Name: </Label>
+            <FieldLabel>
+              <Label>Name: </Label>
             </FieldLabel>
             <FieldBody>
-            <Control>
-              <input className="input" ref={this.nameRef} />
-            </Control>
+              <Control>
+                <input className="input" ref={this.nameRef} />
+              </Control>
             </FieldBody>
           </Field>
           <Field>
