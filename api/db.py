@@ -1,4 +1,5 @@
 import os
+import arrow
 from pony import orm
 from arrow import Arrow
 from flask_login import UserMixin
@@ -14,10 +15,10 @@ class ArrowConverter(orm.dbapiprovider.DatetimeConverter):
         return self.provider.get_converter_by_py_type(datetime).sql_type_name
 
     def sql2py(self, val):
-        try:
+        if isinstance(val, str):
+            return arrow.get(val)
+        else:
             return Arrow.fromdatetime(super().sql2py(val))
-        except Exception:
-            return val
 
     def validate(self, val, obj):
         if not isinstance(val, Arrow):
