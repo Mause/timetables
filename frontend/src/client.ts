@@ -21,10 +21,14 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-let token: string | undefined;
+let token: string | undefined = localStorage.getItem('token') || undefined;
 
-export function setAuth(inToken: string) {
+export function setAuth(inToken: string | undefined) {
   token = inToken;
+  localStorage.setItem('token', inToken || '')
+}
+export function getAuth(): string | undefined {
+  return token;
 }
 
 export default client;
