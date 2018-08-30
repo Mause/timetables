@@ -1,3 +1,4 @@
+import { DataProxy } from 'apollo-cache';
 import {
   Button,
   Control,
@@ -10,12 +11,15 @@ import gql from 'graphql-tag';
 import * as React from 'react';
 import { Component, createRef, FormEvent } from 'react';
 import { compose, FetchResult, graphql, MutationOptions } from 'react-apollo';
-import { IStudentShell } from './types';
+import * as _ from 'underscore';
+
+import { GET_CLASSES } from './Classes';
+import { IClass, IStudent, IStudentShell } from './types';
 
 interface IImportData {
   importClasses: {
-    success: boolean;
-  }
+    classes: IClass[];
+  };
 }
 
 type IImportOptions = MutationOptions<
@@ -69,19 +73,18 @@ class Import extends Component<IImportProps, IImportState, {}> {
     const raw = this.taRef!.current!.value;
 
     try {
-      const { data, errors } = await this.props.Import({
+      const { errors } = await this.props.Import({
+        update: _.partial(update, this.props.student),
         variables: {
           raw,
           userId: this.props.student.id,
         },
       });
 
-      if (data!.importClasses.success) {
-        this.taRef!.current!.value = '';
-      } else if (errors) {
+      if (errors) {
         this.setState({ error: errors[0].message });
       } else {
-        this.setState({ error: 'Unknown error' });
+        this.taRef!.current!.value = '';
       }
     } catch (e) {
       if (e.graphQLErrors) {
@@ -93,10 +96,37 @@ class Import extends Component<IImportProps, IImportState, {}> {
   }
 }
 
+function update(
+  student: IStudent,
+  cache: DataProxy,
+  data: FetchResult<{ classes: IClass[] }>,
+) {
+  const { classes } = data!.data!;
+  const arg = {
+    query: GET_CLASSES,
+    variables: { id: student.id },
+  };
+  const res = cache.readQuery<{ student: IStudent }>(arg);
+  res!.student!.classes!.push(...classes);
+  cache.writeQuery({
+    ...arg,
+    data: { student: res!.student },
+  });
+}
+
 const ImportMutation = gql`
   mutation ImportMutation($userId: ID!, $raw: String!) {
     importClasses(userId: $userId, raw: $raw) {
-      success
+      classes {
+        id
+        name
+        instances {
+          id
+          location
+          start
+          end
+        }
+      }
     }
   }
 `;

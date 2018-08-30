@@ -246,7 +246,7 @@ class Import(graphene.Mutation):
         userId = graphene.NonNull(graphene.ID)
         raw = graphene.NonNull(graphene.String)
 
-    success = graphene.Boolean()
+    classes = graphene.List(Class)
 
     def mutate(self, info, userId, raw):
         user = db.Student.get(id=userId)
@@ -261,8 +261,10 @@ class Import(graphene.Mutation):
         if not isinstance(data, dict):
             raise Exception('Invalid yaml')
 
+        classes = []
         for name, times in data.items():
             clazz = db.Class(name=name, student=user)
+            classes.append(clazz)
 
             for time in set(times):
                 start, end = parse_times(time)
@@ -273,7 +275,7 @@ class Import(graphene.Mutation):
                     'location': 'idk'
                 })
 
-        return Import(True)
+        return Import(classes)
 
 
 class Mutation(graphene.ObjectType):
