@@ -9,27 +9,27 @@ import { IStudentShell } from './types';
 
 class Student extends Component<{student: IStudentShell}, {}, {}> {
   public render() {
-    const student = this.props.student;
-
-    // tslint:disable-next-line jsx-no-lambda
-    const classes = () => <Classes student={student} />;
-    // tslint:disable-next-line jsx-no-lambda
-    const timetables = () => <NaiveTimetable student={student} />;
-    // tslint:disable-next-line jsx-no-lambda
-    const importComp = () => <Import student={student} />;
-
     return (
       <div>
         <Box>
           <Switch>
-            <Route exact={true} path="/classes" render={classes} />
-            <Route exact={true} path="/timetables" render={timetables} />
-            <Route exact={true} path="/import" render={importComp} />
+            <Route exact={true} path="/classes" render={this.classes} />
+            <Route exact={true} path="/timetables" render={this.timetables} />
+            <Route exact={true} path="/import" render={this.importComp} />
             <Route exact={true} path="/" render={this.root} />
           </Switch>
         </Box>
       </div>
     );
+  }
+  private classes() {
+    return <Classes student={this.props.student} />;
+  }
+  private timetables() {
+    return <NaiveTimetable student={this.props.student} />;
+  }
+  private importComp() {
+    return <Import student={this.props.student} />;
   }
   private root() {
     return <Redirect to="/classes" />;
