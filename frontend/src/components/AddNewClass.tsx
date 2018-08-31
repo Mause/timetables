@@ -1,5 +1,5 @@
 import { DataProxy } from 'apollo-cache';
-import { Button, Control, Field, FieldBody, FieldLabel, Label } from 'bloomer';
+import { Box, Button, Control, Field, FieldBody, FieldLabel, Label, Title } from 'bloomer';
 import gql from 'graphql-tag';
 import * as React from 'react';
 import { Component, createRef, FormEvent, RefObject } from 'react';
@@ -49,23 +49,28 @@ class AddNewClass extends Component<IAddNewClassProps, {}, {}> {
   public render() {
     return (
       <form onSubmit={this.onSubmit}>
-        <Field isHorizontal={true}>
-          <Field isGrouped={true}>
-            <FieldLabel>
-              <Label>Name: </Label>
+        <Box>
+          <Title isSize={4}>New Class</Title>
+          <Field isHorizontal={true}>
+            <FieldLabel isNormal={true}>
+              <Label>Name</Label>
             </FieldLabel>
             <FieldBody>
-              <Control>
-                <input className="input" ref={this.nameRef} />
-              </Control>
+              <Field>
+                <Control>
+                  <input className="input" ref={this.nameRef} />
+                </Control>
+              </Field>
+              <Field>
+                <Control>
+                  <Button isColor={"primary"}>
+                    Submit
+                  </Button>
+                </Control>
+              </Field>
             </FieldBody>
           </Field>
-          <Field>
-            <Button type="submit" isColor="primary">
-              Submit
-            </Button>
-          </Field>
-        </Field>
+        </Box>
       </form>
     );
   }
