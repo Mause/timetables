@@ -120,11 +120,16 @@ const ImportMutation = gql`
       classes {
         id
         name
+        __typename
         instances {
           id
-          location
           start
           end
+          location
+          class {
+            id
+          }
+          __typename
         }
       }
     }
