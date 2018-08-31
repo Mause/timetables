@@ -96,6 +96,9 @@ class App extends Component<IAppProps, IAppState, {}> {
                     <Link to="/timetables">Timetables</Link>
                   </NavbarItem>
                   <NavbarItem>
+                    <Link to="/debug">Debug</Link>
+                  </NavbarItem>
+                  <NavbarItem>
                     <Link to="/import">Import</Link>
                   </NavbarItem>
                 </>
