@@ -1,5 +1,5 @@
 import { DataProxy } from 'apollo-cache';
-import { Delete, Select } from 'bloomer';
+import { Button, Delete, Select } from 'bloomer';
 import gql from 'graphql-tag';
 import * as moment from 'moment';
 import * as React from 'react';
@@ -103,6 +103,7 @@ class Classes extends Component<IClassesProps, IClassesState, {}> {
     this.onClickClassInstance = this.onClickClassInstance.bind(this);
     this.updateClassInstance = this.updateClassInstance.bind(this);
     this.updateClass = this.updateClass.bind(this);
+    this.deleteAll = this.deleteAll.bind(this);
   }
   public render() {
     const { qr: { error, loading, data }, student } = this.props;
@@ -131,6 +132,10 @@ class Classes extends Component<IClassesProps, IClassesState, {}> {
         />
         <hr />
 
+        <Button onClick={this.deleteAll}>Delete all</Button>
+
+        <br />
+
         {loading ? <div>Loading...</div> : null}
 
         <div>
@@ -146,6 +151,20 @@ class Classes extends Component<IClassesProps, IClassesState, {}> {
           ))}
         </div>
       </div>
+    );
+  }
+  private async deleteAll() {
+    const { classes } = this.props.qr.data!.student;
+    if (!classes) {
+      return;
+    }
+    await Promise.all(
+      classes.map(clazz =>
+        this.props.DeleteClass({
+          update: this.updateClass,
+          variables: { id: clazz.id },
+        }),
+      ),
     );
   }
   private updateClassInstance(
