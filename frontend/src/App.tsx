@@ -94,9 +94,14 @@ class App extends Component<IAppProps, IAppState, {}> {
             </NavbarStart>
             <NavbarEnd>
               {this.state.user && (
-                <NavbarItem>
-                  <Button onClick={this.logout}>Logout</Button>
-                </NavbarItem>
+                <>
+                  <NavbarItem>
+                    Hi {this.state.user.name}
+                  </NavbarItem>
+                  <NavbarItem>
+                    <Button onClick={this.logout}>Logout</Button>
+                  </NavbarItem>
+                </>
               )}
             </NavbarEnd>
           </NavbarMenu>

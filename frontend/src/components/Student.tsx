@@ -1,4 +1,4 @@
-import { Box, Title } from 'bloomer';
+import { Box } from 'bloomer';
 import * as React from 'react';
 import { Component } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
@@ -20,7 +20,6 @@ class Student extends Component<{student: IStudentShell}, {}, {}> {
 
     return (
       <div>
-        <Title>{student.name}'s timetables</Title>
         <Box>
           <Switch>
             <Route exact={true} path="/classes" render={classes} />
