@@ -3,6 +3,7 @@ import {
   Container,
   Navbar,
   NavbarBrand,
+  NavbarBurger,
   NavbarEnd,
   NavbarItem,
   NavbarMenu,
@@ -33,6 +34,7 @@ import { IStudentShell } from './components/types';
 interface IAppProps extends RouteComponentProps<{}, {}, {}> {}
 interface IAppState {
   user: IStudentShell | null;
+  menuActive: boolean;
 }
 
 function userDecode(s: string | null): IStudentShell | null {
@@ -53,10 +55,11 @@ class App extends Component<IAppProps, IAppState, {}> {
   constructor(props: IAppProps) {
     super(props);
     const auth = getAuth();
-    this.state = { user: userDecode(auth) };
+    this.state = { user: userDecode(auth), menuActive: false };
     this.setAuth = this.setAuth.bind(this);
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
+    this.toggleMenu = this.toggleMenu.bind(this);
   }
   public render() {
     const isLogin = this.props.location.pathname === '/login';
@@ -71,8 +74,9 @@ class App extends Component<IAppProps, IAppState, {}> {
         <Navbar>
           <NavbarBrand>
             <Title>Timetables</Title>
+            <NavbarBurger isActive={this.state.menuActive} onClick={this.toggleMenu} />
           </NavbarBrand>
-          <NavbarMenu>
+          <NavbarMenu isActive={this.state.menuActive}>
             <NavbarStart>
               {this.state.user ? (
                 <>
@@ -116,6 +120,9 @@ class App extends Component<IAppProps, IAppState, {}> {
   }
   private setAuth(token: string): void {
     this.setState({ user: userDecode(token) });
+  }
+  private toggleMenu(ev: FormEvent<any>) {
+    this.setState(oldState => ({menuActive: !oldState.menuActive}));
   }
 }
 
