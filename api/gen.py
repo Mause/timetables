@@ -30,7 +30,10 @@ def type_pair(attr):
     if ty == graphene.ID:
         name = name + 'Id'
 
-    return name, graphene.Argument(graphene.NonNull(ty))
+    if attr.is_required:
+        ty = graphene.NonNull(ty)
+
+    return name, graphene.Argument(ty)
 
 
 def generate_delete_mutation(ot):
