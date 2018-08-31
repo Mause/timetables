@@ -71,10 +71,17 @@ def generate_delete_mutation(ot):
     return mutation.Field()
 
 
+def is_id(value) -> bool:
+    typ = value.type
+    if hasattr(typ, 'of_type'):
+        typ = typ.of_type
+    return typ == graphene.ID
+
+
 def generate_mutation(ot, arguments):
     def mutate(self, info, **kwargs):
         for key, value in raw_arguments.items():
-            if value.type == graphene.ID or value.type.of_type == graphene.ID:
+            if is_id(value):
                 id = kwargs.pop(key)
                 key = key[:-2]
                 kwargs[key] = getattr(db, key.title()).get(id=id)
