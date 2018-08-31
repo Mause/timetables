@@ -101,6 +101,8 @@ class Classes extends Component<IClassesProps, IClassesState, {}> {
     this.state = { classId: undefined };
     this.onClickClass = this.onClickClass.bind(this);
     this.onClickClassInstance = this.onClickClassInstance.bind(this);
+    this.update = this.update.bind(this);
+    this.updateClass = this.updateClass.bind(this);
   }
   public render() {
     const { qr: { error, loading, data }, student } = this.props;
@@ -169,14 +171,14 @@ class Classes extends Component<IClassesProps, IClassesState, {}> {
   private onClickClassInstance(ev: FormEvent<any>, classInstanceId: string) {
     ev.preventDefault();
     this.props.DeleteClassInstance({
-      update: this.update.bind(this),
+      update: this.update,
       variables: { id: classInstanceId },
     });
   }
   private onClickClass(ev: FormEvent<any>, classId: string) {
     ev.preventDefault();
     this.props.DeleteClass({
-      update: this.updateClass.bind(this),
+      update: this.updateClass,
       variables: { id: classId },
     });
   }
