@@ -19,6 +19,7 @@ import AddNewClass from './AddNewClass';
 import AddNewClassInstance from './AddNewClassInstance';
 import renderError from './renderError';
 import { IClass, IClassInstance, IStudent, IStudentShell } from './types';
+import { weekday } from './weekdays';
 
 interface IClassesQuery {
   student: IStudent;
@@ -79,12 +80,11 @@ function render<T>(
 function renderCI(ci: IClassInstance, onClick: EventAndId): ReactNode {
   const F = (d: moment.Moment) => d.format('hh:mma');
   const start = moment.utc(ci.start);
-  const day = moment.weekdaysShort(start.day());
 
   return render(
     ci,
     i => {
-      const base = `${day} ${F(start)} -> ${F(moment.utc(ci.end))}`;
+      const base = `${weekday(start)} ${F(start)} -> ${F(moment.utc(ci.end))}`;
       return i.location ? base + ` @ ${ci.location}` : base;
     },
     onClick,

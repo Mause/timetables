@@ -9,6 +9,7 @@ import Frame from './Frame';
 import renderError from './renderError';
 import { IClassInstance, IStudentShell, ITimetable } from './types';
 import WEEKDAYS from './weekdays';
+import { weekday } from './weekdays';
 
 interface INaiveTimetableProps {
   timetable: ITimetable;
@@ -17,6 +18,8 @@ interface INaiveTimetableProps {
 const fmt = (d: Date) => moment(d).format('hh:mma');
 
 function makeClass(cell: IClassInstance) {
+  const base = `${weekday(moment(cell.start))} ${fmt(cell.start)} to ${fmt(cell.end)}`;
+
   return (
     <Card>
       <CardHeader>
@@ -24,9 +27,7 @@ function makeClass(cell: IClassInstance) {
           {cell.class.name}
         </CardHeaderTitle>
       </CardHeader>
-      <CardContent>
-        {fmt(cell.start)} to {fmt(cell.end)} in {cell.location}
-      </CardContent>
+      <CardContent>{cell.location ? base + ` in ${cell.location}` : base}</CardContent>
     </Card>
   );
 }
