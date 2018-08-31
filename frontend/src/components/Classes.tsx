@@ -83,7 +83,10 @@ function renderCI(ci: IClassInstance, onClick: EventAndId): ReactNode {
 
   return render(
     ci,
-    i => `${day} ${F(start)} -> ${F(moment.utc(ci.end))} @ ${ci.location}`,
+    i => {
+      const base = `${day} ${F(start)} -> ${F(moment.utc(ci.end))}`;
+      return i.location ? base + ` @ ${ci.location}` : base;
+    },
     onClick,
   );
 }
