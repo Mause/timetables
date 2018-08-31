@@ -36,7 +36,7 @@ ClassInstance = type(
     {
         'start': orm.Required(Arrow),
         'end': orm.Required(Arrow),
-        'location': str,
+        'location': orm.Optional(str),
         'class': orm.Required('Class'),
     }
 )
