@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Container,
   Navbar,
@@ -18,6 +19,7 @@ import {
   Redirect,
   Route,
   RouteComponentProps,
+  Switch,
   withRouter,
 } from 'react-router-dom';
 
@@ -26,9 +28,11 @@ import './app.css';
 import './normalise.css';
 
 import { getAuth, setAuth } from './client';
+import Classes from './components/Classes';
 import Debug from './components/Debug';
+import Import from './components/Import';
 import Login from './components/Login';
-import Student from './components/Student';
+import NaiveTimetable from './components/NaiveTimetable';
 import { IStudentShell } from './components/types';
 
 interface IAppProps extends RouteComponentProps<{}, {}, {}> {}
@@ -60,6 +64,11 @@ class App extends Component<IAppProps, IAppState, {}> {
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
     this.toggleMenu = this.toggleMenu.bind(this);
+
+    this.classes = this.classes.bind(this);
+    this.timetables = this.timetables.bind(this);
+    this.importComp = this.importComp.bind(this);
+    this.root = this.root.bind(this);
   }
   public render() {
     const isLogin = this.props.location.pathname === '/login';
@@ -107,12 +116,23 @@ class App extends Component<IAppProps, IAppState, {}> {
           </NavbarMenu>
         </Navbar>
 
-        <Route exact={true} path="/login" render={this.login} />
-        <Route exact={true} path="/debug" component={Debug} />
-        {
-          this.state.user &&
-          <Student student={this.state.user} />
-        }
+        <br/>
+
+        <Box>
+          <Switch>
+            <Route exact={true} path="/login" render={this.login} />
+            <Route exact={true} path="/debug" component={Debug} />
+            {
+              this.state.user &&
+              <>
+                <Route exact={true} path="/classes" render={this.classes} />
+                <Route exact={true} path="/timetables" render={this.timetables} />
+                <Route exact={true} path="/import" render={this.importComp} />
+                <Route exact={true} path="/" render={this.root} />
+              </>
+            }
+          </Switch>
+        </Box>
       </Container>
     );
   }
@@ -128,6 +148,18 @@ class App extends Component<IAppProps, IAppState, {}> {
   }
   private toggleMenu(ev: FormEvent<any>) {
     this.setState(oldState => ({menuActive: !oldState.menuActive}));
+  }
+  private classes() {
+    return <Classes student={this.state.user} />;
+  }
+  private timetables() {
+    return this.state.user && <NaiveTimetable student={this.state.user} />;
+  }
+  private importComp() {
+    return <Import student={this.state.user} />;
+  }
+  private root() {
+    return <Redirect to="/classes" />;
   }
 }
 
