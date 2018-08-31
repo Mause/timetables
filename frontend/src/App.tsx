@@ -81,13 +81,13 @@ class App extends Component<IAppProps, IAppState, {}> {
               {this.state.user ? (
                 <>
                   <NavbarItem>
-                    <Link to={`/classes`}>Classes</Link>
+                    <Link to="/classes">Classes</Link>
                   </NavbarItem>
                   <NavbarItem>
-                    <Link to={`/timetables`}>Timetables</Link>
+                    <Link to="/timetables">Timetables</Link>
                   </NavbarItem>
                   <NavbarItem>
-                    <Link to={`/import`}>Import</Link>
+                    <Link to="/import">Import</Link>
                   </NavbarItem>
                 </>
               ) : null}
