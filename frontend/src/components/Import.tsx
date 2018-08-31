@@ -56,7 +56,14 @@ class Import extends Component<IImportProps, IImportState, {}> {
         <Field>
           <FieldBody>
             <Control>
-              <textarea ref={this.taRef} className="textarea" onChange={this.reset} rows={20} cols={200} id="raw" />
+              <textarea
+                ref={this.taRef}
+                className="textarea"
+                onChange={this.reset}
+                rows={20}
+                cols={200}
+                id="raw"
+              />
             </Control>
           </FieldBody>
         </Field>
