@@ -4,10 +4,9 @@ import gql from 'graphql-tag';
 import * as React from 'react';
 import { Component, createRef, FormEvent, RefObject } from 'react';
 import { FetchResult, Mutation, MutationFn } from 'react-apollo';
-import * as _ from 'underscore';
 import { GET_CLASSES } from './Classes';
 import TimeRangeSelect from './TimeRangeSelect';
-import { IClass, IClassInstance, IStudent, IStudentShell } from './types';
+import { IClass, IClassInstance, IStudentShell } from './types';
 
 const ADD_CLASS_INSTANCE = gql`
   mutation CreateClassInstance(
@@ -28,6 +27,7 @@ const ADD_CLASS_INSTANCE = gql`
         start
         end
         class {
+          student { id }
           id
         }
       }
@@ -142,19 +142,20 @@ interface IGetClassesQuery {
 // `;
 
 function update(
-  student: IStudent,
-  classId: string,
   cache: DataProxy,
   data: FetchResult<ICreateClassInstanceResult>,
 ) {
-  const createClass = data!.data!.createClassInstance;
+  const { classInstance } = data!.data!.createClassInstance;
+  const student = classInstance.class.student;
   const arg = {
     query: GET_CLASSES,
-    variables: { id: student.id },
+    variables: { id: student!.id },
   };
   const res = cache.readQuery<IGetClassesQuery>(arg);
-  const clazz = res!.student.classes.find(cl => cl.id === classId);
-  clazz!.instances.push(createClass.classInstance);
+  const clazz = res!.student.classes.find(
+    cl => cl.id === classInstance.class.id,
+  );
+  clazz!.instances.push(classInstance);
   cache.writeQuery({
     ...arg,
     data: { student: res!.student },
@@ -168,10 +169,7 @@ interface IProps {
 
 export default ({ classes, student }: IProps) => {
   return (
-    <Mutation
-      mutation={ADD_CLASS_INSTANCE}
-      update={_.partial(update, student, classId)}
-    >
+    <Mutation mutation={ADD_CLASS_INSTANCE} update={update}>
       {(mutateFn, result) => (
         <AddNewClassInstance
           classes={classes}
