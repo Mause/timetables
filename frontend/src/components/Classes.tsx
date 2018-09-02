@@ -1,5 +1,5 @@
 import { DataProxy } from 'apollo-cache';
-import { Button, Delete, Select } from 'bloomer';
+import { Box, Button, Delete } from 'bloomer';
 import gql from 'graphql-tag';
 import * as moment from 'moment';
 import * as React from 'react';
@@ -129,10 +129,11 @@ class Classes extends Component<IClassesProps, IClassesState, {}> {
         <Button onClick={this.deleteAll}>Delete all</Button>
 
         <br />
+        <br />
 
         {loading ? <div>Loading...</div> : null}
 
-        <div>
+        <Box>
           {classes.map((cls, index) => (
             <TreeView nodeLabel={renderC(cls, this.onClickClass)} key={index}>
               {cls.instances.map((ins, idx) => (
@@ -143,7 +144,7 @@ class Classes extends Component<IClassesProps, IClassesState, {}> {
               ))}
             </TreeView>
           ))}
-        </div>
+        </Box>
       </div>
     );
   }
