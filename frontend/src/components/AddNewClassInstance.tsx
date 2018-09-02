@@ -131,16 +131,6 @@ interface IGetClassesQuery {
   };
 }
 
-// const GET_CLASS_INSTANCES = gql`
-//   query GetClassInstances($studentId: ID!, $classId: ID!) {
-//     student(id: $studentId) {
-//       class(id: $classId) {
-//         instances
-//       }
-//     }
-//   }
-// `;
-
 function update(
   cache: DataProxy,
   data: FetchResult<ICreateClassInstanceResult>,
