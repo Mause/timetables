@@ -20,6 +20,7 @@ export interface IClass {
   id: string;
   name: string;
   instances: IClassInstance[]
+  student?: IStudent;
 }
 
 export interface IStudentShell {

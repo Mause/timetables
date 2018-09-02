@@ -4,14 +4,14 @@ import gql from 'graphql-tag';
 import * as React from 'react';
 import { Component, createRef, FormEvent, RefObject } from 'react';
 import { FetchResult, Mutation, MutationFn } from 'react-apollo';
-import * as _ from 'underscore';
 import { GET_CLASSES } from './Classes';
-import { IClass, IStudent, IStudentShell } from './types';
+import { IClass, IStudentShell } from './types';
 
 const ADD_CLASS = gql`
   mutation CreateClass($name: String!, $studentId: ID!) {
     createClass(name: $name, studentId: $studentId) {
       class {
+        student { id }
         id
         name
         instances {
@@ -100,18 +100,18 @@ interface IGetClassesQuery {
 }
 
 function update(
-  student: IStudent,
   cache: DataProxy,
   data: FetchResult<ICreateClassResult>,
 ) {
   const createClass = data!.data!.createClass;
+  const student = createClass.class!.student;
   const arg = {
     query: GET_CLASSES,
-    variables: { id: student.id },
+    variables: { id: student!.id },
   };
   const res = cache.readQuery<IGetClassesQuery>(arg);
   const classes = res!.student.classes.concat([createClass.class]);
-  const newStudent: IStudent = { ...student, classes };
+  const newStudent = { ...student, classes };
   cache.writeQuery({
     ...arg,
     data: { student: newStudent },
@@ -120,7 +120,7 @@ function update(
 
 export default ({ student }: { student: IStudentShell }) => {
   return (
-    <Mutation mutation={ADD_CLASS} update={_.partial(update, student)}>
+    <Mutation mutation={ADD_CLASS} update={update}>
       {(mutateFn, result) => (
         <AddNewClass student={student} mutateFn={mutateFn} result={result} />
       )}
