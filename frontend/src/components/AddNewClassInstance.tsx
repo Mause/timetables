@@ -1,5 +1,14 @@
 import { DataProxy } from 'apollo-cache';
-import { Button, Control, Field, FieldBody, FieldLabel, Label, Title } from 'bloomer';
+import {
+  Box,
+  Button,
+  Control,
+  Field,
+  FieldBody,
+  FieldLabel,
+  Label,
+  Title,
+} from 'bloomer';
 import gql from 'graphql-tag';
 import * as React from 'react';
 import { Component, createRef, FormEvent, RefObject } from 'react';
@@ -63,40 +72,42 @@ class AddNewClassInstance extends Component<IAddNewClassProps, {}, {}> {
   public render() {
     return (
       <form onSubmit={this.onSubmit}>
-        <Title isSize={4}>Class Instance</Title>
+        <Box>
+          <Title isSize={4}>Class Instance</Title>
 
-        <Field isHorizontal={true}>
           <Field isHorizontal={true}>
-            <FieldLabel isNormal={true}>
-              <Label>Class</Label>
-            </FieldLabel>
-            <FieldBody>
-              <Control>
-                <div className="select">
-                  <select ref={this.classRef}>
-                    {this.props.classes.map((cls, idx) => (
-                      <option key={idx} value={cls.id}>
-                        {cls.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </Control>
-            </FieldBody>
+            <Field isHorizontal={true}>
+              <FieldLabel isNormal={true}>
+                <Label>Class</Label>
+              </FieldLabel>
+              <FieldBody>
+                <Control>
+                  <div className="select">
+                    <select ref={this.classRef}>
+                      {this.props.classes.map((cls, idx) => (
+                        <option key={idx} value={cls.id}>
+                          {cls.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </Control>
+              </FieldBody>
+            </Field>
+            <Field isHorizontal={true}>
+              <FieldLabel isNormal={true}>
+                <Label>Location:</Label>
+              </FieldLabel>
+              <FieldBody>
+                <Control>
+                  <input className="input" ref={this.locationRef} />
+                </Control>
+              </FieldBody>
+            </Field>
+            <TimeRangeSelect ref={this.rangeRef} />
           </Field>
-          <Field isHorizontal={true}>
-            <FieldLabel isNormal={true}>
-              <Label>Location:</Label>
-            </FieldLabel>
-            <FieldBody>
-              <Control>
-                <input className="input" ref={this.locationRef} />
-              </Control>
-            </FieldBody>
-          </Field>
-          <TimeRangeSelect ref={this.rangeRef} />
-        </Field>
-        <Button type="submit">Submit</Button>
+          <Button type="submit">Submit</Button>
+        </Box>
       </form>
     );
   }
