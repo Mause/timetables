@@ -7,7 +7,7 @@ import { FetchResult, Mutation, MutationFn } from 'react-apollo';
 import * as _ from 'underscore';
 import { GET_CLASSES } from './Classes';
 import TimeRangeSelect from './TimeRangeSelect';
-import { IClassInstance, IStudent, IStudentShell } from './types';
+import { IClass, IClassInstance, IStudent, IStudentShell } from './types';
 
 const ADD_CLASS_INSTANCE = gql`
   mutation CreateClassInstance(
@@ -48,12 +48,13 @@ interface IAddNewClassProps {
   mutateFn: MutationFn<IResult, ICreateClassMutation>;
   result: any;
   student: IStudentShell;
-  classId: string;
+  classes: IClass[];
 }
 
 class AddNewClassInstance extends Component<IAddNewClassProps, {}, {}> {
   private locationRef: RefObject<HTMLInputElement> = createRef();
   private rangeRef: RefObject<TimeRangeSelect> = createRef();
+  private classRef: RefObject<HTMLSelectElement> = createRef();
 
   constructor(props: IAddNewClassProps) {
     super(props);
@@ -63,6 +64,24 @@ class AddNewClassInstance extends Component<IAddNewClassProps, {}, {}> {
     return (
       <form onSubmit={this.onSubmit}>
         <Field isHorizontal={true}>
+          <Field isHorizontal={true}>
+            <FieldLabel isNormal={true}>
+              <Label>Class</Label>
+            </FieldLabel>
+            <FieldBody>
+              <Control>
+                <div className="select">
+                  <select ref={this.classRef}>
+                    {this.props.classes.map((cls, idx) => (
+                      <option key={idx} value={cls.id}>
+                        {cls.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </Control>
+            </FieldBody>
+          </Field>
           <Field isHorizontal={true}>
             <FieldLabel isNormal={true}>
               <Label>Location:</Label>
@@ -85,7 +104,7 @@ class AddNewClassInstance extends Component<IAddNewClassProps, {}, {}> {
 
     await this.props.mutateFn({
       variables: {
-        classId: this.props.classId,
+        classId: this.classRef!.current!.value,
         end: this.rangeRef.current!.endAsDate().toDate(),
         location: lr!.value,
         start: this.rangeRef.current!.startAsDate().toDate(),
@@ -141,11 +160,11 @@ function update(
 }
 
 interface IProps {
-  classId: string;
+  classes: IClass[];
   student: IStudentShell;
 }
 
-export default ({ classId, student }: IProps) => {
+export default ({ classes, student }: IProps) => {
   return (
     <Mutation
       mutation={ADD_CLASS_INSTANCE}
@@ -153,7 +172,7 @@ export default ({ classId, student }: IProps) => {
     >
       {(mutateFn, result) => (
         <AddNewClassInstance
-          classId={classId}
+          classes={classes}
           student={student}
           mutateFn={mutateFn}
           result={result}

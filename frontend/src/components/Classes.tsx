@@ -120,17 +120,8 @@ class Classes extends Component<IClassesProps, IClassesState, {}> {
       <div>
         <AddNewClass student={student} />
         <hr />
-        <Select onChange={this.onClassChange}>
-          {classes.map((cls, idx) => (
-            <option key={idx} value={cls.id}>
-              {cls.name}
-            </option>
-          ))}
-        </Select>
         <AddNewClassInstance
-          classId={
-            this.state.classId || (classes && classes[0] && classes[0].id)
-          }
+          classes={classes}
           student={student}
         />
         <hr />
