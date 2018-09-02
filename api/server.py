@@ -119,6 +119,7 @@ class Class(graphene.ObjectType):
     id = graphene.ID()
     name = graphene.String()
     instances = graphene.List(ClassInstance)
+    student = graphene.Field(lambda: Student)
 
     def resolve_instances(self, info):
         return sorted(self.instances)
