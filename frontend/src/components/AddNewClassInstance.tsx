@@ -1,5 +1,5 @@
 import { DataProxy } from 'apollo-cache';
-import { Button, Control, Field, FieldBody, FieldLabel, Label } from 'bloomer';
+import { Button, Control, Field, FieldBody, FieldLabel, Label, Title } from 'bloomer';
 import gql from 'graphql-tag';
 import * as React from 'react';
 import { Component, createRef, FormEvent, RefObject } from 'react';
@@ -63,6 +63,8 @@ class AddNewClassInstance extends Component<IAddNewClassProps, {}, {}> {
   public render() {
     return (
       <form onSubmit={this.onSubmit}>
+        <Title isSize={4}>Class Instance</Title>
+
         <Field isHorizontal={true}>
           <Field isHorizontal={true}>
             <FieldLabel isNormal={true}>
