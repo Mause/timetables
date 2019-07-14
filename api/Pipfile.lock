@@ -84,11 +84,11 @@
         },
         "flask-cors": {
             "hashes": [
-                "sha256:e4c8fc15d3e4b4cce6d3b325f2bab91e0e09811a61f50d7a53493bc44242a4f1",
-                "sha256:ecc016c5b32fa5da813ec8d272941cfddf5f6bba9060c405a70285415cbf24c9"
+                "sha256:72170423eb4612f0847318afff8c247b38bd516b7737adfc10d1c2cdbb382d16",
+                "sha256:f4d97201660e6bbcff2d89d082b5b6d31abee04b1b3003ee073a6fd25ad1d69a"
             ],
             "index": "pypi",
-            "version": "==3.0.6"
+            "version": "==3.0.8"
         },
         "flask-graphql": {
             "hashes": [
@@ -553,17 +553,17 @@
         },
         "jedi": {
             "hashes": [
-                "sha256:49ccb782651bb6f7009810d17a3316f8867dde31654c750506970742e18b553d",
-                "sha256:79d0f6595f3846dffcbe667cc6dc821b96e5baa8add125176c31a3917eb19d58"
+                "sha256:53c850f1a7d3cfcd306cc513e2450a54bdf5cacd7604b74e42dd1f0758eaaf36",
+                "sha256:e07457174ef7cb2342ff94fa56484fe41cec7ef69b0059f01d3f812379cb6f7c"
             ],
-            "version": "==0.14.0"
+            "version": "==0.14.1"
         },
         "parso": {
             "hashes": [
-                "sha256:5052bb33be034cba784193e74b1cde6ebf29ae8b8c1e4ad94df0c4209bfc4826",
-                "sha256:db5881df1643bf3e66c097bfd8935cf03eae73f4cb61ae4433c9ea4fb6613446"
+                "sha256:63854233e1fadb5da97f2744b6b24346d2750b85965e7e399bec1620232797dc",
+                "sha256:666b0ee4a7a1220f65d367617f2cd3ffddff3e205f3f16a0284df30e774c2a9c"
             ],
-            "version": "==0.5.0"
+            "version": "==0.5.1"
         },
         "pexpect": {
             "hashes": [
