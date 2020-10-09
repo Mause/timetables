@@ -33,11 +33,11 @@
         },
         "beautifulsoup4": {
             "hashes": [
-                "sha256:1edf5e39f3a5bc6e38b235b369128416c7239b34f692acccececb040233032a1",
-                "sha256:5dfe44f8fddc89ac5453f02659d3ab1668f2c0d9684839f0785037e8c6d9ac8d",
-                "sha256:645d833a828722357038299b7f6879940c11dddd95b900fe5387c258b72bb883"
+                "sha256:4c98143716ef1cb40bf7f39a8e3eec8f8b009509e74904ba3a7b315431577e35",
+                "sha256:84729e322ad1d5b4d25f805bfa05b902dd96450f43842c4e99067d5e1369eb25",
+                "sha256:fff47e031e34ec82bf17e00da8f592fe7de69aeea38be00523c04623c04fb666"
             ],
-            "version": "==4.9.2"
+            "version": "==4.9.3"
         },
         "betamax": {
             "hashes": [
@@ -327,11 +327,11 @@
         },
         "passlib": {
             "hashes": [
-                "sha256:68c35c98a7968850e17f1b6892720764cc7eed0ef2b7cb3116a89a28e43fe177",
-                "sha256:8d666cef936198bc2ab47ee9b0410c94adf2ba798e5a84bf220be079ae7ab6a8"
+                "sha256:aa6bca462b8d8bda89c70b382f0c298a20b5560af6cbfa2dce410c0a2fb669f1",
+                "sha256:defd50f72b65c5402ab2c573830a6978e5f202ad0d984793c8dde2c4152ebe04"
             ],
             "index": "pypi",
-            "version": "==1.7.2"
+            "version": "==1.7.4"
         },
         "pillow": {
             "hashes": [
